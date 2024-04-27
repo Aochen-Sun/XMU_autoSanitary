@@ -1,0 +1,2 @@
+# XMU_autoSanitary
+基于selenium的XMU院级卫检一键自主工具
