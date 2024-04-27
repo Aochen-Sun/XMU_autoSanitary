@@ -1,12 +1,15 @@
+####Author: https://github.com/Aochen-Sun/
+####Version: 1.0
+####Date: 04/27/2024
+
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
 import time
 import pandas as pd
-import os
+
 
 ####基于chrome driver
-os.chdir('D:/硕士生期间/零活/C240427宿舍系统')
 mobile_emulation = {"deviceName": "iPhone 6"}
 options = Options()
 options.add_experimental_option("mobileEmulation", mobile_emulation)
@@ -26,7 +29,7 @@ if driver.find_elements(By.CLASS_NAME, "van-grid-item__text"):
 else:
     print("登陆失败，请重试")
 
-####在block_list中配置目标楼栋
+####在block_list中配置目标楼栋，以海韵1~海韵17为例
 block_list = ['0901','0902','0903','0904','0905','0906','0907','0908',
               '0809','0810','0811','0812','0813','0814','0815','0816','0817']
 dfs=[]
@@ -51,7 +54,6 @@ aggregate_df = pd.concat([new_df, aggregate_df], axis=1)
 aggregate_df.drop(columns=['title'], inplace=True)
 aggregate_df = aggregate_df[aggregate_df['status'] != '空房']
 aggregate_df.drop(columns=['status'], inplace=True)
-aggregate_df.to_excel('管研-海韵-宿舍列表-240427.xlsx', index=False, encoding='utf_8_sig')
 del df, dfs, i, j, block_list, new_df, room_status, room_title, status_list, title_list, url, username, password
 
 for Room, blockID in zip(aggregate_df['Room'], aggregate_df['blockID']):
